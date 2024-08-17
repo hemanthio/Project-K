@@ -1,9 +1,23 @@
+import Sidenav from "./partials/Sidenav"
+import Topnav from "./partials/Topnav"
 
 
 const Home = () => {
     document.title = "Movie | Homepage"
   return (
-    <div className=" text-3xl"> Home</div>
+    <div className="flex">
+       <Sidenav />
+       <div className="w-[80%] h-full">
+       <Topnav />  
+       </div>
+   
+    
+   
+ 
+  
+     
+   
+     </div>
   )
 }
 
