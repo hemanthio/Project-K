@@ -1,9 +1,32 @@
-import { Link } from "react-router-dom"
+
 import { useState } from "react"
+import { useEffect } from 'react'
+import axios from '../../utils/axios'
+import { Link } from 'react-router-dom'
+import noimage from '../../../public/noimage.webp'
 
 const Topnav = () => {
   const [query, setQuery] = useState("")
-  console.log(query)
+  const [searches, setSearches] = useState([])
+ 
+  const GetSearches = async ()=>{
+    try {
+      const {data}= await axios.get(`/search/multi?query=${query}`)
+      console.log(data)
+      setSearches(data.results)
+    } 
+    catch (error) 
+    {
+console.log(error)
+    }
+
+   }
+
+
+  useEffect(()=>{
+      GetSearches()
+  },[query])
+
   return (
     <div className="w-full mt-2 h-[10vh] relative flex justify-start items-center ml-[15%]" >
  <i className="text-zinc-400 font-in text-3xl ri-search-line"></i>
@@ -19,13 +42,27 @@ const Topnav = () => {
 
  <div className="absolute w-[50%] overflow-auto max-h-[50vh] bg-zinc-200 top-[100%]">
 
-{/* <Link className="font-semibold hover:text-black hover:bg-zinc-300 
+ {searches.map((search,index)=>(
+  <Link key={index} className="font-semibold hover:text-black hover:bg-zinc-300 
 w-[100%] text-zinc-600 p-4 flex justify-start items-center border-b-2 border-zinc-100">
-  <img src="" alt="" />
-  <span>Hello vattakai</span>
-  </Link> */}
+  <img 
+   className="w-[10vh] h-[10vh] object-cover mr-4 rounded shadow-lg"
+   src={
+    search.backdrop_path || search.profile_path ?
+    `
+    https://image.tmdb.org/t/p/original/${search.backdrop_path || search.profile_path} `
+    : 
+    noimage 
 
-
+    } alt="" />
+  <span>{
+    search.name || 
+    search.original_name ||
+    search.title ||
+    search.original_title
+    }</span>
+  </Link>
+ ))}
 
  </div>
     </div>

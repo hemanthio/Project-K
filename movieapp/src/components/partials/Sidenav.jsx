@@ -2,6 +2,9 @@
 import { Link } from 'react-router-dom'
 
 const Sidenav = () => {
+
+  
+
   return (
     <div className="w-[20%] h-full border-r-2 border-zinc-400 ">
 
