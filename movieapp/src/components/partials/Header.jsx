@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
 
 
 const Header = ({ data }) => {
-    console.log(data);
+  
     return (
         <div
             style={{
@@ -41,15 +41,6 @@ const Header = ({ data }) => {
           data.original_title
           }</h1>
           <p 
-          
-        //   style={{
-        //                 display: '-webkit-box',
-        //                 WebkitLineClamp: 3, // Limits to 3 lines
-        //                 WebkitBoxOrient: 'vertical',
-        //                 overflow: 'hidden',
-        //                 textOverflow: 'ellipsis',
-        //             }}
-          
            className="w-[60%] mt-3 text-white"> {data.overview.slice(0,200)}... <Link className="text-blue-400">more</Link> 
 
            </p>
